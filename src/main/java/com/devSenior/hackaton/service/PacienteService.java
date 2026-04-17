@@ -5,15 +5,35 @@ import java.util.Optional;
 
 import com.devSenior.hackaton.model.Paciente;
 
-public interface PacienteService {
+public class PacienteService implements IPacienteService {
 
-    List<Paciente> listarPacientes();
+    @Override
+    public List<Paciente> listarPacientes() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarPacientes'");
+    }
 
-    Optional<Paciente> buscarPorId(Long id);
+    @Override
+    public Optional<Paciente> buscarPorId(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+    }
 
-    Paciente agregar(Paciente autor);
+    @Override
+    public Paciente agregar(Paciente autor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'agregar'");
+    }
 
-    Paciente actualizar(long id, Paciente paciente);
+    @Override
+    public Paciente actualizar(long id, Paciente paciente) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+    }
 
-    boolean eliminar(long id);
+    @Override
+    public boolean eliminar(long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+    }
 }
