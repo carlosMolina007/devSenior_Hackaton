@@ -52,12 +52,12 @@ public class PacienteController {
         try {
             pacienteServicio.agregar(paciente);
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Autor agregado correctamente");
+                    .body("paciente agregado correctamente");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al agregar el autor");
+                    .body("Error al agregar el paciente");
         }
     }
 
@@ -81,12 +81,12 @@ public class PacienteController {
             boolean eliminado = pacienteServicio.eliminar(id);
             if (!eliminado) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("No se encontró ningún autor con id " + id);
+                        .body("No se encontró ningún paciente con id " + id);
             }
-            return ResponseEntity.ok("Autor con id " + id + " eliminado correctamente");
+            return ResponseEntity.ok("paciente con id " + id + " eliminado correctamente");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al eliminar el autor");
+                    .body("Error al eliminar el paciente");
         }
     }
 
