@@ -2,38 +2,45 @@ package com.devSenior.hackaton.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
+
+import org.springframework.stereotype.Service;
 
 import com.devSenior.hackaton.model.Paciente;
+import com.devSenior.hackaton.repository.PacienteRepository;
 
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
 public class PacienteService implements IPacienteService {
+
+    private final PacienteRepository pacienteRepositorio;
+    private final AtomicLong contador = new AtomicLong(0);
 
     @Override
     public List<Paciente> listarPacientes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarPacientes'");
+        return pacienteRepositorio.obtenerTodos();
     }
 
     @Override
     public Optional<Paciente> buscarPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorId'");
+        return pacienteRepositorio.obtenerPorId(id);
     }
 
     @Override
-    public Paciente agregar(Paciente autor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'agregar'");
+    public Paciente agregar(Paciente paciente) {
+        paciente.setId(contador.getAndIncrement());
+        return pacienteRepositorio.agregarPaciente(paciente);
     }
 
     @Override
     public Paciente actualizar(long id, Paciente paciente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizar'");
+        return pacienteRepositorio.actualizarActor(id, paciente);
     }
 
     @Override
     public boolean eliminar(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+        return pacienteRepositorio.eliminarPorId(id);
     }
 }
