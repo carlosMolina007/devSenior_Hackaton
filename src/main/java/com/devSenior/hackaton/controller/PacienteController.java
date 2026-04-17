@@ -16,18 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devSenior.hackaton.model.Paciente;
 import com.devSenior.hackaton.service.IPacienteService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/pacientes")
 @AllArgsConstructor
+@Tag(name = "Pacientes", description = "Operaciones CRUD para pacientes")
 public class PacienteController {
 
     private final IPacienteService pacienteServicio;
 
     @GetMapping
-
+    @Operation(summary = "Listar todos los pacientes", description = "Retorna una lista de todos los pacientes registrados. Si no hay, devuelve 204.")
     public ResponseEntity<List<Paciente>> listarTodos() {
         try {
             List<Paciente> pacientes = pacienteServicio.listarPacientes();
@@ -41,6 +44,7 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar paciente por ID", description = "Obtiene los detalles de un paciente mediante ID")
     public ResponseEntity<Paciente> buscarPorId(@PathVariable Long id) {
         return pacienteServicio.buscarPorId(id)
                 .map(ResponseEntity::ok)
@@ -48,6 +52,7 @@ public class PacienteController {
     }
 
     @PostMapping
+    @Operation(summary = "Registrar nuevo paciente", description = "Crea y añade un nuevo paciente a nuestra base de datos (lista)")
     public ResponseEntity<String> agregar(@Valid @RequestBody Paciente paciente) {
         try {
             pacienteServicio.agregar(paciente);
@@ -62,6 +67,7 @@ public class PacienteController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Actualizar paciente", description = "Modifica los datos de un paciente existente. Si el ID no existe, devuelve 404.")
     public ResponseEntity<Paciente> actualizar(@PathVariable Long id,
             @Valid @RequestBody Paciente paciente) {
         try {
@@ -76,6 +82,7 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar paciente", description = "Borra un paciente de la base de datos (lista) por su ID.")
     public ResponseEntity<String> eliminar(@PathVariable Long id) {
         try {
             boolean eliminado = pacienteServicio.eliminar(id);
